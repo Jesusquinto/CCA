@@ -1,0 +1,220 @@
+
+<div class=" content animated fadeIn fast" style="padding-top: 0px;padding: 0px 50px 0px 50px;">
+        <div class=" row">
+          <div class=" col-md-12">
+            <div class=" card">
+              <div class=" card-body">
+
+
+
+                    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                            <mat-step [stepControl]="firstFormGroup" [editable]="editable">
+                                <ng-template matStepLabel>Seleccionar PATHWAY</ng-template>
+                                <div class="container">
+                                <div class="row" style="text-align: center">
+                                    <div *ngFor="let p of pathways" class="card col-sm-6 col-md-3 col-lg-3" >
+                                         <img class="card-img-top" [src]="ruta+p.imagen" alt="Card image cap" style=" height: 80px;"/>
+                                            <div class="card-body seleccionar-pathway" (click)="selectPathway(p)" style="max-height: 250px"> 
+                                              <h4 class="card-title" style="color: #f89c1c;">{{p.nombre}}</h4>
+                                              <p class="card-text">{{p.descripcion}}</p>
+                                            </div>
+                                          </div>
+                                      </div>
+                                    </div>
+
+                            </mat-step>
+                            <mat-step [stepControl]="secondFormGroup" [editable]="editable">
+                          
+                                <ng-template matStepLabel>Añadir recursos</ng-template>
+                                
+
+                                                <div class=" card" *ngIf="pathway">
+                                                  <div class=" card-body">
+                                                    <form>
+                                                      <div class=" row">
+                                                        <div class=" col-md-12 pr-md-1">
+                                                          <div class=" form-group">
+                                                            <label> Pathway seleccionado </label>
+                                                            <input
+                                                              class=" form-control"
+                                                              disabled=""
+                                                              placeholder="Company"
+                                                              type="text"
+                                                              [value]="pathway.nombre"
+                                                            />
+                                                          </div>
+                                                        </div>
+                                                     
+                                                      
+                                                      </div>
+                                                    
+                                                      <div class=" row">
+                                                            <div class=" col-md-12">
+                                                              <div class=" form-group">
+                                                                    <label>Evidencias fotograficas</label>
+
+                                                                    <p-fileUpload name="archivos[]"  multiple="multiple"  #imagenes
+                                                                    accept="image/*" maxFileSize="2000000"
+                                                                    [showUploadButton]="false"
+                                                                    chooseLabel="Seleccionar"   
+                                                                    cancelLabel="Quitar todo"
+                                                                    fileLimit="4"
+                                                                    
+                                                                    ></p-fileUpload>
+                                                                </div>
+                                                            </div>
+                                                      </div>
+
+                                                  
+                                                      <div class=" row" [formGroup]="secondFormGroup">
+                                                        <div class=" col-md-12">
+                                                          <div class=" form-group">
+                                                            <label> Descripción adicional (Notas)</label>
+                                                            <textarea
+                                                              class=" form-control"
+                                                              cols="100"
+                                                              placeholder="Nota al instructor o descripción general"
+                                                              rows="4"
+                                                              formControlName="descripcion"></textarea>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+
+                                                    </form>
+                                                  </div>
+                                                  <div class=" card-footer">
+                                                    <button class=" btn btn-fill btn-default" (click)="crearConstancia()">Crear Constancia</button>
+                                                  </div>
+                                                 </div>
+                             
+                            </mat-step>
+                            <mat-step >
+                              <ng-template matStepLabel>Completado</ng-template>
+                                
+                              <div fxLayout="column" fxLayoutAlign="center center" class="container"
+                              style="text-align: center;  padding-top: 150px; padding-bottom: 150px">
+                              <i class="far fa-plus-square text-default" style="font-size: 100px"></i>
+                              <p class="mt-2">Constancia de {{pathway?.nombre}} creada con exíto</p>
+                              <button class=" btn btn-fill btn-default" (click)="resetStepper()">Crear otra</button>
+
+                            </div>
+                              
+
+                            </mat-step>
+                          </mat-horizontal-stepper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- <form>
+               
+                  <div class=" row">
+                    <div class=" col-md-12 pr-md-1">
+                      <div class=" form-group">
+                        <label> Pathway </label>
+                        <input
+                          class=" form-control"
+                          placeholder="Company"
+                          type="text"
+                          value="Mike"
+                        />
+                      </div>
+                    </div>
+                    <div class=" col-md-6 pl-md-1">
+                      <div class=" form-group">
+                        <label> Last Name </label>
+                        <input
+                          class=" form-control"
+                          placeholder="Last Name"
+                          type="text"
+                          value="Andrew"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" row">
+                    <div class=" col-md-12">
+                      <div class=" form-group">
+                        <label> Address </label>
+                        <input
+                          class=" form-control"
+                          placeholder="Home Address"
+                          type="text"
+                          value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" row">
+                    <div class=" col-md-4 pr-md-1">
+                      <div class=" form-group">
+                        <label> City </label>
+                        <input
+                          class=" form-control"
+                          placeholder="City"
+                          type="text"
+                          value="Mike"
+                        />
+                      </div>
+                    </div>
+                    <div class=" col-md-4 px-md-1">
+                      <div class=" form-group">
+                        <label> Country </label>
+                        <input
+                          class=" form-control"
+                          placeholder="Country"
+                          type="text"
+                          value="Andrew"
+                        />
+                      </div>
+                    </div>
+                    <div class=" col-md-4 pl-md-1">
+                      <div class=" form-group">
+                        <label> Postal Code </label>
+                        <input
+                          class=" form-control"
+                          placeholder="ZIP Code"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class=" row">
+                    <div class=" col-md-8">
+                      <div class=" form-group">
+                        <label> About Me </label>
+                        <textarea
+                          class=" form-control"
+                          cols="80"
+                          placeholder="Here can be your description"
+                          rows="4"
+                          value="Mike"
+                        >
+      Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
+      </textarea
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </form> -->
+              </div>
+              <!-- <div class=" card-footer">
+                <button class=" btn btn-fill btn-danger" type="submit">Save</button>
+              </div> -->
+            </div>
+          </div>
+        
+        </div>
+      </div>
+      

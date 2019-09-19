@@ -1,0 +1,255 @@
+
+  
+
+<mat-sidenav-container style="border-radius: 10px;" style="height: 600px" class="animated fadeIn fast">
+
+
+    <mat-sidenav #sidenav [opened]="sidenavOpen" [mode]="sidenavOpen ? 'side' : 'over' " class="animated fadeIn fast">
+      <nav class="navbar navbar-horizontal navbar-expand-lg navbar-white" style="background: #e7e7e7;color: #344675;">
+        <div class="container">
+
+            PATHWAYS CONSTANCIAS
+          <!-- BOTONES DEL NAVBAR -->
+
+         <!--  <a class="nav-link nav-link-icon filter-hover" id="navbar-default_dropdown_1 " role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="position: relative;
+          left: 20% !important;">
+            <i style="font-size: 20px;" class="fas fa-arrow-up"></i>
+            <span class="nav-link-inner--text d-lg-none"></span>
+          </a> -->
+
+        </div>
+      </nav>
+
+
+
+
+      <mat-nav-list class="p-0 mailbox-sidenav-list" style="width: 320px !important;">
+
+        <!-- LISTA DE LAS CONSTANCIAS -->
+        <div  class="animated fadeIn fast">
+          <perfect-scrollbar style="max-height: 500px;">
+            <div  *ngFor="let c of constancias"  class="card card-stats constancia mb-lg-0"  
+            style="border-radius: 0px;" [ngClass]="{'selected': c.selected}"
+            (click)="seleccionarConstancia(c)">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                      <span class="text-nowrap" style="position: relative;">
+                          <p matLine class="text-truncate subject" style="font-size: smaller;margin: 0px;">CREADO EL {{c.created_at | date: 'dd/MM/yyyy h:mm' }}</p>
+                        </span>
+                    <span class="h3 mb-0" style="position: relative; bottom: 9px; font-size: 19px; font-weight: 500;">{{c.pathway.nombre | truncate}}</span>
+    
+                    <span class="text-nowrap" style="position: relative;">
+                      <p matLine class="text-truncate subject" style="position: relative;bottom: 15px;font-size: 13px;font-weight: 500;font-weight: 200;">{{c.aprendiz.usuario.nombre + ' ' + c.aprendiz.usuario.apellido  +' - '+c.aprendiz.usuario.identificacion}}</p>
+                    </span>
+
+
+
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape text-blue animated fadeIn fast" style="color: #354776;">
+                      <i class="far fa-sticky-note animated fadeIn fast" style="font-size: 35px"></i>
+                    </div>
+                  </div>
+                </div>
+                  <span class="mr-2 text-warning" style="position: relative; bottom: 14px;">
+                    <i class="far"
+                    [ngClass]="{
+                      'fa-eye-slash': c.estado == 0,
+                      'fa-thumbs-up': c.estado === 1,
+                      'fa-thumbs-down': c.estado == 2,
+                      'fa-eye' : c.estado == 3}">
+
+                    </i>
+                    <i class="ml-1" *ngIf="c.estado == 0" style="font-style: inherit;">Sin revisar</i>
+                    <i class="ml-1" *ngIf="c.estado == 1" style="font-style: inherit;">Aprobado</i>
+                    <i class="ml-1" *ngIf="c.estado == 2" style="font-style: inherit;">No aprobado</i>
+                    <i class="ml-1" *ngIf="c.estado == 3" style="font-style: inherit;">Para revisión</i>
+                  </span>
+                  
+              </div>
+            </div>
+          </perfect-scrollbar>
+        </div>
+        <!-- END LISTA DE LAS CONSTANCIAS -->
+
+
+
+        <div *ngIf="constancias?.length == 0 || constancias == null" fxLayout="column" fxLayoutAlign="center center" class="container"
+        style="text-align: center;  padding-top: 150px; padding-bottom: 150px">
+        <i class="fas fa-filter text-default" style="font-size: 100px"></i>
+        <p class="mt-2">No se encontraron constancias</p>
+          
+
+        </div>
+
+      </mat-nav-list>
+
+    </mat-sidenav>
+
+
+
+
+
+    <!-- NAVBAR DEL TRAMITE SELECCIONADO -->
+    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default" style="padding: 6px">
+      <div class="container">
+        <button class="navbar-toggler" (click)="sidenav.toggle()"><span class="ni ni-bullet-list-67"></span></button>
+      </div>
+    </nav>
+
+    <div>
+
+
+
+
+
+      <div *ngIf="constancia != null" class="animated fadeIn fast">
+
+        
+        <perfect-scrollbar style="max-height: 600px;">
+          <div class="container">
+          
+            <div class="row">
+              <div class="col-xs-12 col-sm-9">
+                <div class="panel panel-default" style="margin-top: 5% !important">
+                  <div class="panel-heading">
+                  </div>
+                  <div class="panel-body">
+                    <div class="profile__avatar" style="    background: white;
+                    text-align: center;">
+                        <span><div style=" text-align: center;   position: relative;background: #fe8d72;padding: 4px;color: white;font-weight: 600;">
+                          <i class="far"
+                          [ngClass]="{
+                            'fa-eye-slash': constancia.estado == 0,
+                            'fa-thumbs-up': constancia.estado === 1,
+                            'fa-thumbs-down': constancia.estado == 2,
+                            'fa-eye' : constancia.estado == 3}">
+      
+                          </i>
+                          <i class="ml-1" *ngIf="constancia.estado == 0" style="font-style: inherit;">Sin revisar</i>
+                          <i class="ml-1" *ngIf="constancia.estado == 1" style="font-style: inherit;">Aprobado</i>
+                          <i class="ml-1" *ngIf="constancia.estado == 2" style="font-style: inherit;">No aprobado</i>
+                          <i class="ml-1" *ngIf="constancia.estado == 3" style="font-style: inherit;">Para revisión</i>
+                          
+                        </div></span>
+                      <img
+                        src='{{resources}}/{{constancia.pathway.imagen}}'
+                        onError="this.src='/assets/img/default.png';"
+                        alt="..." style="    width: 100%;
+                        top: 2em;
+                        position: relative;">
+                    </div>
+                    <div class="profile__header">
+                      <h2>{{constancia.pathway.nombre}}</h2> 
+                      <p style="    color: gray;position: relative;bottom: 2em;">{{constancia.pathway.descripcion}}</p>
+                      <p  style="position: relative;bottom: 3em;font-size: initial;color: #f89c1c;">Creado el {{constancia.created_at | date}}</p>
+                      <perfect-scrollbar style="max-height: 100px;">
+
+
+                          
+                        
+
+
+
+                      </perfect-scrollbar>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel panel-default" style="    position: relative;bottom: 80px;margin-left: 32px;">
+                  <div class="panel-heading">
+                    <h4 class="panel-title"></h4>
+                  </div>
+                  <div class="panel-body mt-5">
+                    <div class="card shadow" style="width: 100% !important">
+                      <div class="card-header border-0">
+                        <div class="row align-items-center">
+                          <div class="col">
+                            <h3 class="mb-0">Información de la constancia  </h3>
+                          </div>
+                        </div>
+                        <div>
+                      
+                  
+                            <p style="margin-top: 1em;width: 80%;">{{constancia.descripcion}}</p>
+
+
+                          <div class="container mt-4">
+                            <div class="row">
+                              
+
+
+                    
+                           
+                            <br/>
+                    
+                                <div *ngFor="let i of constancia.imagenes" class="gallery_product col-lg-3 col-md-3 col-sm-3 col-xs-6 filter hdpe mb-4 imagen-container" (click)="verImagen(uploads+''+i)" >
+                                    <img [src]="uploads+''+i" class="img-responsive" style="width: 100%;">
+                                </div>
+                                
+
+  
+                            </div>
+                        </div>
+
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-xs-12 col-sm-3" style="margin-top: 5%;">
+
+       
+                <h4>native html select</h4>
+                <mat-form-field>
+                  <mat-label>Select your car (required)</mat-label>
+                  <select  required >
+                    <option label="--select something --"></option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                  <mat-hint>You can pick up your favorite car here</mat-hint>
+                </mat-form-field>
+
+
+              </div>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+
+     
+
+      
+
+    
+
+    
+
+
+
+
+      <div *ngIf="!constancia && estadoConstancia != 'cargando'" fxLayout="column" fxLayoutAlign="center center" class="container"
+        style="text-align: center;  padding-top: 150px; padding-bottom: 150px">
+        <i class="far fa-sticky-note text-default" style="font-size: 100px"></i>
+        <p class="mt-2">Seleccione una constancia a administrar</p>
+      </div>
+
+      <div *ngIf="estadoConstancia == 'cargando'" fxLayout="column" fxLayoutAlign="center center" class="container"
+        style="text-align: center;  padding-top: 150px; padding-bottom: 150px">
+        <p class="mt-2">Cargando...</p>
+      </div>
+
+
+</div>
+  </mat-sidenav-container>
+
+
+

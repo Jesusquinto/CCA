@@ -1,0 +1,135 @@
+
+<section class="login-block">
+    <form class="login-form" [formGroup]="datos">
+
+  <div class="container" style="width: 60%; border-radius: 0px; position: relative; top: 5%">
+      <div class="row">
+
+          <div class="col-md-4 login-sec">
+              <div class="text-center">
+                  <img src="assets/img/cca-logo.png" style="width: 250px; margin-bottom: 10%;">
+              </div>
+
+                  <div class="form-group" style="text-align: center; margin: 0px">
+                    <input
+                    class=" form-control"
+                    placeholder="Nombre"  formControlName="nombre"
+                    type="text"/>
+                  <show-errors [control]="datos.controls.nombre"></show-errors>
+                  </div>
+
+                  <div class="form-group mt-4" style="text-align: center">
+                    <input
+                    class=" form-control"
+                    placeholder="Apellido"  formControlName="apellido"
+                    type="text"/>
+                    <show-errors [control]="datos.controls.apellido"></show-errors>
+                  </div>
+
+                  <div class="form-group mt-4" style="text-align: center">
+                    <input
+                    class=" form-control"
+                    placeholder="Correo"  formControlName="email"
+                    type="email"/>
+                    <show-errors [control]="datos.controls.email"></show-errors>
+                  </div>
+
+                  <div class="form-group mt-4" style="text-align: center">
+                    <select id="inputState" class="form-control" formControlName="tipoid">
+                    <option value="CC">Cedula de ciudadania</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                  </select>
+                  <show-errors [control]="datos.controls.tipoid"></show-errors>
+
+                  </div>
+                  
+
+                  
+
+              
+
+
+                    <div class="form-group mt-4" style="text-align: center">
+                        <input
+                        class=" form-control"
+                        placeholder="Identificacion"  formControlName="id"
+                        type="number"/>
+                        <show-errors [control]="datos.controls.id"></show-errors>
+                      </div>
+
+
+
+                  <div class="form-group mt-4" style="text-align: center">
+                    <input
+                    class=" form-control"
+                    placeholder="contraseña"  formControlName="password"
+                    type="password"/>
+                    <show-errors [control]="datos.controls.password"></show-errors>
+                  </div>
+
+                  <div class="form-group mt-4" style="text-align: center">
+                    <input
+                    class=" form-control"
+                    placeholder="repetir contraseña"  formControlName="repeatpassword"
+                    type="password"/>
+                    <show-errors [control]="datos.controls.repeatpassword"></show-errors>
+                  </div>
+
+                
+
+                
+
+
+
+              <div class="row mt-5">
+                <div class="col-md-6"> <div class="form-check">
+                  <label class="form-check-label">
+                    <mat-checkbox>Recuerdame</mat-checkbox>
+
+                  </label>
+                </div></div>
+                <div class="col-md-6"> <button  class="btn btn-info animation-on-hover ingresar"(click)="registrar()">Registrame</button></div>
+              </div>
+
+              <div class="mt-4" style="font-size: 12px; text-align: center"><i class="fas fa-arrow-left"></i> <a routerLink="/login"class="ml-2" style="color: #1d8cf8">Ya tengo una cuenta</a></div>
+
+            
+          </div>
+
+
+          <div class="col-md-8 banner-sec">
+              <div class="banner-text">
+                  <h2 style="margin: 0px">Registro Aprendiz AWS</h2>
+                  
+                  <div class="form-group mt-4" *ngIf="nodos">
+                    <label for="inputState2" style="color: white">Seleccionar nodo</label>
+                    <select id="inputState2" class="form-control" formControlName="nodo" style="background: white" (change)="getFichas($event)">
+                      <option *ngFor="let nodo of nodos" [value]="nodo.id">{{nodo.nombre}}</option>
+                  </select>
+                  <show-errors [control]="datos.controls.nodo"></show-errors>
+
+                  </div>
+
+                  <div class="form-group" *ngIf="fichas" [@enterAnimation]>
+                    <label for="inputState2" style="color: white">Seleccionar ficha</label>
+                    <select id="inputState2" class="form-control" formControlName="ficha" style="background: white">
+                      <option *ngFor="let ficha of fichas" [value]="ficha.id">{{ficha.nombre}}</option>
+                  </select>
+                  <show-errors [control]="datos.controls.ficha"></show-errors>
+
+                  </div>
+
+
+
+                  <p class="mt-4">El aplicativo CCA ofrece a los instructores del Sena la facilidad para la revición del cumplimiento de los certificados
+                    brindados por Amazon de cada aprendíz
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</form>
+
+
+</section>
