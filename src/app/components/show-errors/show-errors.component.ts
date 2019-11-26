@@ -50,7 +50,8 @@ export class ShowErrorsDirective {
         'invalidEmail' : () => 'Debe insertar un correo valido',
         'mismatchedPasswords' : () => 'Las contraseñas deben coincidir',
         'isntPdf' :() => 'El tipo no es soportado',
-        'email' :() => 'Debe insertar un correo valido'
+        'email' :() => 'Debe insertar un correo valido',
+        'invalidMisenaEmail': () => 'Debe ingresar un correo misena'
 
     };
 

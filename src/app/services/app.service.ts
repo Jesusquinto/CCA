@@ -112,6 +112,9 @@ getFichasByNodo(nodoId){
 }
 
 
+public openSpinner() { this.spinner.show(); }
+public closeSpinner() { this.spinner.hide(); }
+
 crearConstancia(data: FormData ){
   this.getHeaders2();
   if(this.auth.isAuthenticated()){let exp = this.auth.isTokenExpired();if(!exp){return this.http.post(`${this.url}user/crearconstancia`, data, this.httpOptions);}}

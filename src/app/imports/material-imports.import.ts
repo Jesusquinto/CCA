@@ -30,7 +30,10 @@ import { MatAutocompleteModule,
          MatTabsModule,
          MatToolbarModule,
          MatTooltipModule,
-         MatStepperModule } from '@angular/material';
+         MatStepperModule,
+         MatFormFieldModule  } from '@angular/material';
+         import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+    
 
 @NgModule({
   imports: [
@@ -65,7 +68,10 @@ import { MatAutocompleteModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgxMatSelectSearchModule 
   ],
   exports: [
     MatAutocompleteModule,
@@ -98,7 +104,10 @@ import { MatAutocompleteModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    NgxMatSelectSearchModule 
   ],
   declarations: []
 })

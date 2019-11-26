@@ -2,119 +2,69 @@
 <div class=" content">
   <div class=" row">
     <div class=" col-12">
-      <div class=" card card-chart" [ngClass]="{'changecolor':estado==='ver-constancias'}">
+      <div class=" card card-chart">
         <div class=" card-header">
           <div class=" row">
             <div class=" col-sm-6 text-left">
-              <h5 class=" card-category">Administrar constancias</h5>
-              <h2 *ngIf="estado === 'seleccionar-ficha'" class=" card-title animated fadeIn fast" >Seleccione una ficha</h2>
-              <h2 *ngIf="estado === 'seleccionar-pathway'" class=" card-title animated fadeIn fast" >Seleccine un pahtway</h2>
-              <h2 *ngIf="estado === 'ver-constancias'" class=" card-title animated fadeIn fast" >Administrar constancia</h2>
-
-
-
-
-              <div class="form-group mt-4" *ngIf="fichas && estado == 'seleccionar-ficha'">
-                  <mat-form-field style="margin-left: 2rem; margin-right: 2rem; width: 100%">
-                      <mat-select [(ngModel)]="fichaCtrl" placeholder="Seleccionar Ficha" (selectionChange)="getPathways()">
-                        <mat-option>
-                          <ngx-mat-select-search [(ngModel)]="fichaFilterCtrl" [placeholderLabel]="'Buscar ficha...'"
-                          [noEntriesFoundLabel]="'no se encontró la ficha'"></ngx-mat-select-search>
-                        </mat-option>
-                        <mat-option *ngFor="let f of fichas | searchPipe:{nombre: fichaFilterCtrl, acronimo: fichaFilterCtrl}" [value]="f">
-                          {{f.nombre}} [{{f.acronimo}}] 
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-
-
-                </div>
-            </div> 
-            
+              <h5 class=" card-category">Total Shipments</h5>
+              <h2 class=" card-title">Performance</h2>
+            </div>
             <div class=" col-sm-6">
-                <div
-                  class=" btn-group btn-group-toggle float-right"
-                  data-toggle="buttons"
-                >
-                  <label class=" btn btn-sm btn-default btn-simple animation-on-hover" (click)="fichaCtrl= null;estado='seleccionar-ficha'" [ngClass]="{'active':estado==='seleccionar-ficha'}">
-                    <input checked="checked" name="options" type="radio" />
-  
-                    <span
-                      class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                      ficha
-                    </span>
-                    <span class=" d-block d-sm-none">
-                      <i class=" tim-icons icon-single-02"> </i>
-                    </span>
-                  </label>
-                  <label class=" btn btn-sm btn-default btn-simple animation-on-hover" (click)="estado='seleccionar-pathway'" [ngClass]="{'active':estado==='seleccionar-pathway'}">
-                    <input
-                      class=" d-none d-sm-none"
-                      name="options"
-                      type="radio"
-                    />
-  
-                    <span
-                      class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
-                    >
-                      pathway
-                    </span>
-                    <span class=" d-block d-sm-none">
-                      <i class=" tim-icons icon-gift-2"> </i>
-                    </span>
-                  </label>
+              <div
+                class=" btn-group btn-group-toggle float-right"
+                data-toggle="buttons"
+              >
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[0];updateOptions();clicked=true;clicked1=false;clicked2=false" [ngClass]="{'active':clicked===true}">
+                  <input checked="checked" name="options" type="radio" />
 
-                  <label class=" btn btn-sm btn-default btn-simple animation-on-hover"  [ngClass]="{'active':estado==='ver-constancias'}">
-                      <input checked="checked" name="options" type="radio" />
-    
-                      <span
-                        class=" d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          constancias
-                        
-                      </span>
-                      <span class=" d-block d-sm-none">
-                        <i class=" tim-icons icon-single-02"> </i>
-                      </span>
-                    </label>
-                
-                </div>
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Accounts
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    <i class=" tim-icons icon-single-02"> </i>
+                  </span>
+                </label>
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[1];updateOptions();clicked=false;clicked1=true;clicked2=false" [ngClass]="{'active':clicked1===true}">
+                  <input
+                    class=" d-none d-sm-none"
+                    name="options"
+                    type="radio"
+                  />
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Purchases
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    <i class=" tim-icons icon-gift-2"> </i>
+                  </span>
+                </label>
+                <label class=" btn btn-sm btn-danger btn-simple" (click)="data=datasets[2];updateOptions();clicked=false;clicked1=false;clicked2=true" [ngClass]="{'active':clicked2===true}">
+                  <input class=" d-none" name="options" type="radio" />
+
+                  <span
+                    class=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                  >
+                    Sessions
+                  </span>
+                  <span class=" d-block d-sm-none">
+                    <i class=" tim-icons icon-tap-02"> </i>
+                  </span>
+                </label>
               </div>
-       
+            </div>
           </div>
         </div>
-        <div class=" card-body" style="    padding-left: 100px;
-        width: 100%;
-        text-align: center;
-        padding-right: 100px;">
-
-          
-
-
-
-            <div class="container" *ngIf="estado == 'seleccionar-pathway'" >
-                <div class="row" style="text-align: center">
-                    <div *ngFor="let p of pathways" class="card col-sm-6 col-md-3 col-lg-3" >
-                         <img class="card-img-top" [src]="ruta+p.imagen" alt="Card image cap" style=" height: 80px;"/>
-                            <div class="card-body seleccionar-pathway" (click)="selectPathway(p)" style="max-height: 250px"> 
-                              <h4 class="card-title" style="color: #f89c1c;">{{p.nombre}}</h4>
-                              <p class="card-text">{{p.descripcion}}</p>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-
-
-
-
-
-<!--           <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
- -->        </div>
-            <app-ver-constancias-instructores *ngIf="estado === 'ver-constancias'" [pathway]="pathwaySelected" [ficha]="fichaCtrl" class="animated fadeIn fast"></app-ver-constancias-instructores> 
-
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
+        </div>
       </div>
     </div>
   </div>
-<!--   <div class=" row">
+  <div class=" row">
     <div class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
@@ -430,5 +380,5 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>

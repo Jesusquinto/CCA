@@ -11,11 +11,12 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-import { AppRoutingModule } from "./app-routing.module";
+import { AppRoutingModule, routes } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 
 import { NgxSpinnerModule } from "ngx-spinner";
 import { InstructorLayoutComponent } from './layouts/instructor-layout/instructor-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 
 @NgModule({
@@ -25,12 +26,14 @@ import { InstructorLayoutComponent } from './layouts/instructor-layout/instructo
     HttpClientModule,
     ComponentsModule,
     NgbModule,
-    RouterModule,
+    RouterModule.forRoot(routes,{
+      useHash: false
+    }),
     AppRoutingModule,
     NgxSpinnerModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AprendizLayoutComponent, AuthLayoutComponent, InstructorLayoutComponent],
+  declarations: [AppComponent, AprendizLayoutComponent, AuthLayoutComponent, InstructorLayoutComponent, AdminLayoutComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

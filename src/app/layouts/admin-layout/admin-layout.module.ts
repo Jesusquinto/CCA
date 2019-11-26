@@ -3,15 +3,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OverlayContainer } from '@angular/cdk/overlay';
 
 
-import { InstructorLayoutRoutes } from "./instructor-layout.routing";
-import { IconsComponent } from "../../pages/icons/icons.component";
-import { MapComponent } from "../../pages/map/map.component";
-import { NotificationsComponent } from "../../pages/notifications/notifications.component";
-import { AorendicesInstructorComponent } from "../../pages/aprendices-instructor/aprendices-instructor.component";
-import { TypographyComponent } from "../../pages/typography/typography.component";
+import { AdminLayoutRoutes } from "./admin-layout.routing";
+
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -24,10 +19,11 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ShowImageComponent } from 'src/app/modals/show-image/show-image.component';
-import { CustomOverlayContainer } from 'src/app/utils/custom-overlay-container';
-import { VerConstaciasInstructoresComponent } from 'src/app/pages/constancias -instructores/ver-constancias-instructores/ver-constancias-instructores.component';
-import { ConstanciasInstructoresComponent } from 'src/app/pages/constancias -instructores/constancias-instructores.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
+import { NodosComponent } from 'src/app/pages/nodos/nodos.component';
+import { NodosFormComponent } from 'src/app/pages/nodos/nodos-form/nodos-form.component';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -36,7 +32,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(InstructorLayoutRoutes),
+    RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -49,9 +45,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDialogModule
   ],
   declarations: [
-    VerConstaciasInstructoresComponent,
-    ConstanciasInstructoresComponent,
-    AorendicesInstructorComponent
+    DashboardComponent,
+    NodosComponent,
+    NodosFormComponent
     // RtlComponent
   ],
   providers: [
@@ -61,7 +57,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
   ],
-  entryComponents:[ShowImageComponent]
+  entryComponents:[ShowImageComponent, NodosFormComponent]
 
 })
-export class InstructorLayoutModule {}
+export class AdminLayoutModule {}

@@ -8,6 +8,8 @@ import { DepartamentoSearchPipe } from './departamento-search.pipe';
 import { MunicipioSearchPipe } from './municipio-search.pipe';
 import { ContratanteSearchPipe } from './contratante-search.pipe.';
 import { TruncateFilePipe } from './truncate-file.pipe';
+import { UniqueSearchPipe } from './unique-search.pipe';
+import { searchPipe } from './search.pipe';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { TruncateFilePipe } from './truncate-file.pipe';
       DepartamentoSearchPipe,
       MunicipioSearchPipe,
       ContratanteSearchPipe,
-      TruncateFilePipe
+      TruncateFilePipe,
+      UniqueSearchPipe,
+      searchPipe
     ],
     exports: [
         TruncateFilePipe,
@@ -30,7 +34,9 @@ import { TruncateFilePipe } from './truncate-file.pipe';
         TruncatePipe,
         DepartamentoSearchPipe,
         MunicipioSearchPipe,
-        ContratanteSearchPipe
+        ContratanteSearchPipe,
+        UniqueSearchPipe,
+        searchPipe
     ]
 })
 export class PipesModule { }

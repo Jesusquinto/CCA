@@ -9,8 +9,10 @@ import { LoginGuard } from './guards/login.guard';
 import { AprendizGuard } from './guards/aprendiz.guard';
 import { InstructorLayoutComponent } from './layouts/instructor-layout/instructor-layout.component';
 import { InstructorGuard } from './guards/instructor.guard';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AdminGuard } from './guards/admin.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: "",
     redirectTo: "login",
@@ -54,6 +56,21 @@ const routes: Routes = [
     ],
     canActivate: [InstructorGuard]
   },
+
+  //ADMIN
+//INSTRUCTOR
+{
+  path: '',
+  component: AdminLayoutComponent,
+  children: [
+    {
+      path: '',
+      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+    }
+  ],
+  canActivate: [AdminGuard]
+},
+
 
   //DEFAULT
   {

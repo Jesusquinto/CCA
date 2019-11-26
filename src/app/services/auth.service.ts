@@ -66,6 +66,11 @@ export class AuthService {
     this._usuario.fichas = payload.fichas;
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
     switch (payload.rol) {
+      case 1:
+      this.router.navigate(['dashboard']);
+
+      break;
+
       case 3:
           this.router.navigate(['constancias']);
 

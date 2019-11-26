@@ -7,10 +7,11 @@ import { FooterComponent } from "./footer/footer.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { ShowErrorsDirective } from './show-errors/show-errors.component';
-
+import { ShowImageComponent } from '../modals/show-image/show-image.component';
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule],
-  declarations: [FooterComponent, NavbarComponent, SidebarComponent,ShowErrorsDirective  ],
-  exports: [FooterComponent, NavbarComponent, SidebarComponent, ShowErrorsDirective  ]
+  declarations: [FooterComponent, NavbarComponent, SidebarComponent,ShowErrorsDirective, ShowImageComponent  ],
+  exports: [FooterComponent, NavbarComponent, SidebarComponent, ShowErrorsDirective, ShowImageComponent
+  ]
 })
 export class ComponentsModule {}

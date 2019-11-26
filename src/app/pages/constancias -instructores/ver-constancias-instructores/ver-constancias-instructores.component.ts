@@ -4,6 +4,7 @@ import swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Endpoints } from 'src/app/services/endpoints';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ShowImageComponent } from 'src/app/modals/show-image/show-image.component';
 
 
 @Component({
@@ -43,10 +44,22 @@ export class VerConstaciasInstructoresComponent implements OnInit {
   } */
 
 
-    getConstancias(){
+  setEstadoConstacia(){
+    this.spinner.show();
+    this.servicio.put('constancia/estado', this.constancia).subscribe(
+      result => {this.spinner.hide(), console.log(result)},
+      error => {this.spinner.hide(), console.log(error)}      
+    )
+  }
 
+
+
+
+    getConstancias(){
+      console.log(this.ficha)
       this.spinner.show();
-      this.servicio.get('constancias/instructor/'.concat(this.pathway.id).concat('/'.concat(this.ficha))).subscribe(result =>{this.constancias = result, this.spinner.hide(),
+      this.servicio.get('constancias/instructor/'.concat(this.pathway.id).concat('/'.concat(this.ficha.id))).subscribe(result =>{this.constancias = result, this.spinner.hide(),
+        console.log(this.constancias)
         this.constancias.forEach(e => {
             e.selected = false;
             e.imagenes = JSON.parse(e.imagenes);
@@ -56,12 +69,15 @@ export class VerConstaciasInstructoresComponent implements OnInit {
     }
 
     verImagen(imagen){
-        this.imagen = imagen;
-/*         this.openDialog();
- */        console.log(imagen);
-
-
-
+      this.imagen = imagen;
+      const dialogRef = this.dialog.open(ShowImageComponent, {
+        width: '80%',
+        data: this.imagen,
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+      });
+   console.log(imagen);
     }
 
 

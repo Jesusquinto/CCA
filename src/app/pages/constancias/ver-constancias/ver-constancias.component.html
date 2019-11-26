@@ -108,7 +108,7 @@
                 <div class="panel panel-default" style="margin-top: 5% !important">
                   <div class="panel-heading">
                   </div>
-                  <div class="panel-body">
+                  <div class="panel-body" style="    height: 12rem;">
                     <div class="profile__avatar" style="    background: white;
                     text-align: center;">
                         <span><div style=" text-align: center;   position: relative;background: #fe8d72;padding: 4px;color: white;font-weight: 600;">
@@ -137,6 +137,9 @@
                       <h2>{{constancia.pathway.nombre}}</h2> 
                       <p style="    color: gray;position: relative;bottom: 2em;">{{constancia.pathway.descripcion}}</p>
                       <p  style="position: relative;bottom: 3em;font-size: initial;color: #f89c1c;">Creado el {{constancia.created_at | date}}</p>
+                      <p *ngIf="constancia.instructor"  style="position: relative;bottom: 4.7rem;font-size: initial;color: #fc8d72;">Revisado por {{constancia.instructor.usuario.nombre}} {{constancia.instructor.usuario.apellido}} - {{constancia.instructor.usuario.identificacion}}</p>
+                      <p *ngIf="constancia.instructor"  style="position: relative;bottom: 6.5rem;font-size: initial;color: #fc8d72;">El {{constancia.updated_at | date}}</p>
+
                       <perfect-scrollbar style="max-height: 100px;">
 
 

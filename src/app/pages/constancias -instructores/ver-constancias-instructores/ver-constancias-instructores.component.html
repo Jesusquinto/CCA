@@ -59,7 +59,7 @@
                       'fa-eye-slash': c.estado == 0,
                       'fa-thumbs-up': c.estado === 1,
                       'fa-thumbs-down': c.estado == 2,
-                      'fa-eye' : c.estado == 3}">
+                      'fa-file-alt' : c.estado == 3}">
 
                     </i>
                     <i class="ml-1" *ngIf="c.estado == 0" style="font-style: inherit;">Sin revisar</i>
@@ -125,7 +125,7 @@
                             'fa-eye-slash': constancia.estado == 0,
                             'fa-thumbs-up': constancia.estado === 1,
                             'fa-thumbs-down': constancia.estado == 2,
-                            'fa-eye' : constancia.estado == 3}">
+                            'fa-file-alt' : constancia.estado == 3}">
       
                           </i>
                           <i class="ml-1" *ngIf="constancia.estado == 0" style="font-style: inherit;">Sin revisar</i>
@@ -145,11 +145,13 @@
                       <h2>{{constancia.pathway.nombre}}</h2> 
                       <p style="    color: gray;position: relative;bottom: 2em;">{{constancia.pathway.descripcion}}</p>
                       <p  style="position: relative;bottom: 3em;font-size: initial;color: #f89c1c;">Creado el {{constancia.created_at | date}}</p>
+                      <p  style="position: relative;bottom: 4.7rem;font-size: initial;color: #fc8d72;">Por {{constancia.aprendiz.usuario.nombre}} {{constancia.aprendiz.usuario.apellido}} - {{constancia.aprendiz.usuario.identificacion}}</p>
+
                       <perfect-scrollbar style="max-height: 100px;">
 
 
-                          
-                        
+
+
 
 
 
@@ -204,19 +206,51 @@
 
               </div>
               <div class="col-xs-12 col-sm-3" style="margin-top: 5%;">
+                  <div class=" card card-chart" [ngClass]="{'changecolor':estado==='ver-constancias'}">
+                      <div class=" card-header">
+                        <div class=" row">
+                          <div class=" col-sm-12 text-left">
+                            <h5 class=" card-category">Revision</h5>
+                            <h4  class=" card-title animated fadeIn fast" >Revición de la constancia</h4>
+                                
+                            
+                            </div>
+                            </div>
+                            </div>
 
+                            <div class=" card-body">
+                                <mat-form-field style="margin-left: 2rem; margin-right: 2rem;">
+                                    <mat-select [(ngModel)]="constancia.estado" placeholder="Estado de constancia"  (selectionChange)="setEstadoConstacia()">
+                                   
+                                      <mat-option *ngIf="constancia.estado == 0"  [value]="0">
+                                        Sin revisar
+                                      </mat-option>
+
+                                      <mat-option [value]="1">
+                                        Aprobado
+                                      </mat-option>
+
+                                      <mat-option [value]="2">
+                                          No aprobado
+                                        </mat-option>
+
+                                        <mat-option [value]="3">
+                                            Para revisar
+                                          </mat-option>
+
+
+
+
+                                    </mat-select>
+                                  </mat-form-field>
+
+                              
+                            </div>
+
+
+                            </div>
        
-                <h4>native html select</h4>
-                <mat-form-field>
-                  <mat-label>Select your car (required)</mat-label>
-                  <select  required >
-                    <option label="--select something --"></option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                  <mat-hint>You can pick up your favorite car here</mat-hint>
-                </mat-form-field>
+            
 
 
               </div>

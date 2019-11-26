@@ -19,10 +19,17 @@ export class ConstanciasInstructoresComponent implements OnInit {
   public display :boolean = true;
   public pathways:any;
   public pathwaySelected: any;
-  public fichas: any;
-  public ruta: any;
-  public fichaSelected : any;
 
+
+
+  public fichas: Array<any>;
+  public fichaCtrl: any;
+  public fichaFilterCtrl: any;
+
+
+
+
+  public ruta: any;
   public Toast = swal.mixin({
     toast: true,
     position: 'top-end',
@@ -35,19 +42,26 @@ export class ConstanciasInstructoresComponent implements OnInit {
   getFichas(){
     this.spinner.show();
     this.servicio.get('instructor/fichas').subscribe(
-      (result: any) => { this.fichas = result, this.spinner.hide() },
+      (result: any) => {this.spinner.hide();
+        let fichas : Array<any> = new Array();
+        result.forEach(e => {
+          fichas.push(e.ficha);
+        });
+        this.fichas = fichas;
+        console.log(this.fichas)
+      },
       error => { this.Toast.fire({ type: 'error', title: error.error.error.message }), this.spinner.hide() }
     );
   }
 
 
 
-  getPathways(e){
-    console.log(e);
-    this.estado = 'seleccionar-pathway';
+
+
+  getPathways(){
     this.spinner.show();
     this.servicio.get('pathways').subscribe(
-      (result: any) => { this.pathways = result, this.spinner.hide() },
+      (result: any) => { this.pathways = result, this.spinner.hide(),     this.estado = 'seleccionar-pathway';},
       error => { this.Toast.fire({ type: 'error', title: error.error.error.message }), this.spinner.hide() }
 
     );
@@ -65,6 +79,7 @@ export class ConstanciasInstructoresComponent implements OnInit {
   constructor(private servicio: AppService, private authService: AuthService, private router: Router, private spinner: NgxSpinnerService) {
     this.estado = 'seleccionar-ficha';
     this.ruta = Endpoints.resources;
+    this.fichaFilterCtrl = '';
 
   }
 

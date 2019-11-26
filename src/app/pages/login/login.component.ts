@@ -40,7 +40,9 @@ export class LoginComponent implements OnInit {
       this.spinner.show();
         this.servicio.login(new Usuario(this.datos.controls['email'].value, this.datos.controls['password'].value)).subscribe(
           (result:any) =>{this.Toast.fire({type: 'success',title: `Bienvenido ${result.user.nombre} ${result.user.apellido}`}); this.authService.guardarUsuario(result.token);this.spinner.hide();},
-          error =>{if(error.status === 400){this.Toast.fire({type: 'error',title: 'Credenciales incorrectas'})};this.spinner.hide();}
+          error =>{if(error.status === 404){this.Toast.fire({type: 'error',title: 'Credenciales incorrectas'})};
+                  if(error.status === 403){this.Toast.fire({type: 'info',title: error.error.error.message }) }; console.log(error)
+          this.spinner.hide();}
           
           );
     }else{

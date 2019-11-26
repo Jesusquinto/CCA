@@ -7,6 +7,24 @@ export function emailValidator(control: FormControl): {[key: string]: any} {
     }
 }
 
+export function misenaEmailValidator(control: FormControl): {[key: string]: any} {
+   if(control.value){
+       let palabras = control.value.split('@')
+       if(palabras[1] == 'misena.edu.co'){
+
+       }else{
+        return {invalidMisenaEmail: true};
+       }
+   }     
+
+
+/* 
+    var emailRegexp = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/; 
+    if (control.value && !emailRegexp.test(control.value)) {
+    } */
+}
+
+
 export function matchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
     return (group: FormGroup) => {
         let password= group.controls[passwordKey];

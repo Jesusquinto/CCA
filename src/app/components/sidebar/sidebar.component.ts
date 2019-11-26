@@ -28,6 +28,71 @@ export const ROUTESAPRENDIZ: RouteInfo[] = [
  ];
 
 
+ export const ROUTESADMIN: RouteInfo[] = [
+  {
+    path: "/dashboard",
+    title: "Dashboard",
+    icon: "icon-components",
+    class: ""
+  },
+
+  {
+    path: "/nodos",
+    title: "Nodos",
+    icon: "icon-bank",
+    class: ""
+  },
+
+  {
+    path: "/fichas",
+    title: "Fichas",
+    icon: "icon-badge",
+    class: ""
+  },
+
+  {
+    path: "/pathways",
+    title: "Pathways",
+    icon: "icon-single-copy-04",
+    class: ""
+  },
+
+  {
+    path: "/constancias",
+    title: "constancias",
+    icon: "icon-notes",
+    class: ""
+  },
+
+  {
+    path: "/usuarios",
+    title: "usuarios",
+    icon: "icon-single-02",
+    class: ""
+  },
+
+  {
+    path: "/aprendices",
+    title: "Aprendices",
+    icon: "icon-single-02",
+    class: ""
+  },
+
+  
+
+  {
+    path: "/instructores",
+    title: "Instructores",
+    icon: "icon-single-02",
+    class: ""
+  },
+
+ 
+
+
+ ]
+
+
  export const ROUTESINSTRUCTOR: RouteInfo[] = [
   {
     path: "/constancias-aprendices",
@@ -74,6 +139,12 @@ export class SidebarComponent implements OnInit {
 
   
     switch (this.usuario.obtenerDatosUser().rol) {
+
+      case 1:
+      this.menuItems = ROUTESADMIN.filter(menuItems => menuItems);
+      this.rol = "Admin";
+      break;
+
       case 2:
         this.menuItems = ROUTESINSTRUCTOR.filter(menuItem => menuItem);
         ROUTES = ROUTESINSTRUCTOR;

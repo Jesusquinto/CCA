@@ -45,6 +45,7 @@ export class VerConstaciasComponent implements OnInit {
     getConstancias(){
       this.spinner.show();
       this.servicio.get('constancias').subscribe(result =>{this.constancias = result, this.spinner.hide(),
+        console.log(result);
         this.constancias.forEach(e => {
             e.selected = false;
             e.imagenes = JSON.parse(e.imagenes);

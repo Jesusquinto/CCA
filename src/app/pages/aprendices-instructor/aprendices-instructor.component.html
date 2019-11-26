@@ -1,0 +1,129 @@
+
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+       
+          <div class="row">
+
+              <div class="col-sm-6 text-left">
+                  <h4 class=" card-title">Apredices</h4>
+                  <p class=" category">Lista de aprendices activos</p>
+
+              </div>
+
+
+
+
+              <div class=" col-sm-6 text-left">
+            
+                  <div class="form-group mt-4" *ngIf="fichas">
+                      <mat-form-field style="padding-right: 2rem; width: 100%">
+                          <mat-select [(ngModel)]="fichaCtrl" placeholder="Seleccionar Ficha" (selectionChange)="getAprendices()">
+                            <mat-option>
+                              <ngx-mat-select-search [(ngModel)]="fichaFilterCtrl" [placeholderLabel]="'Buscar ficha...'"
+                              [noEntriesFoundLabel]="'no se encontró la ficha'"></ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option *ngFor="let f of fichas | searchPipe:{nombre: fichaFilterCtrl, acronimo: fichaFilterCtrl}" [value]="f">
+                              {{f.nombre | truncate : 30}} [{{f.acronimo}}] 
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+    
+    
+                    </div>
+                </div> 
+
+
+
+
+
+          </div>
+
+
+
+
+        </div>
+        <div class=" card-body" *ngIf="data?.aprendicesActivos.length > 0">
+          <div class=" table-responsive" style="overflow: auto;">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Nombre</th>
+                  <th>identificacion</th>
+                  <th>correo</th>
+                  <th>Ficha</th>
+                  <th class=" text-center"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let a of data?.aprendicesActivos"> 
+                  <td>{{a.usuario.nombre}} {{a.usuario.apellido}}</td>
+                  <td>{{a.usuario.tipo_identificacion}} {{a.usuario.identificacion}}</td>
+                  <td>{{a.usuario.email}}</td>
+                  <td>{{a.ficha.acronimo}} {{a.ficha.numero}}</td>
+                  <td class=" text-center">
+                      
+    
+                    <button (click)="estadoAprendiz(a)" class=" btn btn-link float-right mb-0 " type="button" placement="left" ngbTooltip="Desactivar aprendiz" container="body">
+                        <i class="tim-icons icon-simple-remove" style="font-size: 18px;" ></i>
+                      </button>  
+
+
+
+                </td>
+
+
+                </tr>
+       
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-md-12" *ngIf="data?.aprendicesNoActivos.length > 0">
+      <div class=" card card-plain">
+        <div class=" card-header">
+          <h4 class=" card-title">Aprendices pendientes por activación</h4>
+          <p class=" category">Lista de aprendices sin activar</p>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive" style="overflow: auto;">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                    <th>Nombre</th>
+                    <th>identificacion</th>
+                    <th>correo</th>
+                    <th>Ficha</th>
+                    <th class=" text-center"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let a of data?.aprendicesNoActivos">
+                    <td>{{a.usuario.nombre}} {{a.usuario.apellido}}</td>
+                    <td>{{a.usuario.tipo_identificacion}} {{a.usuario.identificacion}}</td>
+                    <td>{{a.usuario.email}}</td>
+                    <td>{{a.ficha.acronimo}} {{a.ficha.numero}}</td>
+                    <td class=" text-center">
+                      
+    
+                        <button (click)="estadoAprendiz(a)" class=" btn btn-link float-right mb-0 " type="button" placement="left" ngbTooltip="Activar aprendiz" container="body">
+                            <i class="tim-icons icon-simple-add" style="font-size: 18px;" ></i>
+                          </button>  
+
+
+
+                    </td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

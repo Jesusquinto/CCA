@@ -12,7 +12,6 @@ import { IconsComponent } from "../../pages/icons/icons.component";
 import { MapComponent } from "../../pages/map/map.component";
 import { NotificationsComponent } from "../../pages/notifications/notifications.component";
 import { PefilAprendizComponent } from "../../pages/perfil-aprendiz/perfil-aprendiz.component";
-import { TablesComponent } from "../../pages/tables/tables.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
@@ -27,8 +26,10 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import {FileUploadModule} from 'primeng/fileupload';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ShowImageComponent } from 'src/app/modals/show-image/show-image.component';
 import { CustomOverlayContainer } from 'src/app/utils/custom-overlay-container';
+import { ShowImageComponent } from 'src/app/modals/show-image/show-image.component';
+import { ComponentsModule } from 'src/app/components/components.module';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -45,19 +46,18 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     PipesModule,
     FileUploadModule,
-    MatDialogModule
+    MatDialogModule,
+    ComponentsModule
   ],
   declarations: [
     CrearConstaciasComponent,
     VerConstaciasComponent,
     ConstanciasComponent,
     PefilAprendizComponent,
-    TablesComponent,
     IconsComponent,
     TypographyComponent,
     NotificationsComponent,
     MapComponent,
-    ShowImageComponent
     // RtlComponent
   ],
   providers: [

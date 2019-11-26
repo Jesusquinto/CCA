@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 import { AppService } from 'src/app/services/app.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { matchingPasswords, numberLimits } from '../../components/validators/app-validators';
+import { matchingPasswords, numberLimits, misenaEmailValidator} from '../../components/validators/app-validators';
 import { trigger, style, transition, animate, keyframes, query, stagger, group, state, animateChild } from '@angular/animations';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
     this.datos = this._formBuilder.group({
       'nombre': ['', Validators.compose([Validators.required, Validators.maxLength(65)])],
       'apellido': ['', Validators.compose([Validators.required, Validators.maxLength(65)])],
-      'email': ['', Validators.compose([Validators.required, Validators.email, Validators.maxLength(255)])],
+      'email': ['', Validators.compose([Validators.required, misenaEmailValidator, Validators.maxLength(255)])],
       'tipoid': ['CC', Validators.compose([Validators.required])],
       'id': ['', Validators.compose([Validators.required, numberLimits({ "max": '11' })])],
       'password': ['', Validators.compose([Validators.required])],
